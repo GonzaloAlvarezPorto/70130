@@ -1,0 +1,12 @@
+POST http://localhost:8080/sessions/login
+Content-Type: application/json
+
+{
+    "email":"f@gmail.com",
+    "password":"El mejor"
+}
+
+
+###
+GET http://localhost:8080/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZjVlMGYwNTNiNzYwMzQ0NzNlNjBiZCIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzI3OTc2Mzg5LCJleHAiOjE3MjgwNjI3ODl9.golvo6KcpKNsE8s61DTexxQ7qjDsgx7XjN-g7_aw654

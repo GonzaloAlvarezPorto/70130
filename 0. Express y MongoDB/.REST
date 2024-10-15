@@ -1,0 +1,23 @@
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+"first_name":"Gonzalo",
+"last_name":"Alvarez Porto",
+"email":"machupichu@gmail.com"
+}
+
+
+###
+GET http://localhost:8080/users/66ea149f75d6942a8bb22bda
+
+
+###
+PUT http://localhost:8080/users/66ea149f75d6942a8bb22bda
+Content-Type: application/json
+
+{
+"first_name":"Gonzalo",
+"last_name":"Alvarez Porto",
+"email":"papapapa@gmail.com"
+}

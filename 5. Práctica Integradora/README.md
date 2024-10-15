@@ -1,0 +1,4 @@
+-proteger las contraseñas
+-instalar y utilizar jwt.
+-login, register, vistas y sus endpoints
+-endpoints para login y register (POST)

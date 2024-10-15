@@ -1,0 +1,38 @@
+<main>
+    {{#if Productos.length}}
+    {{#each Productos}}
+    <ul>
+        <li>Producto: {{title}}</li>
+        <li>Precio: ${{precio}}</li>
+        <li>Category: {{category}}</li>
+        <li><button class="deleteProduct" data-id="{{_id}}">Eliminar producto</button></li>
+        <li>
+            <button class="agregarAlCarrito"
+                    data-id="{{_id}}"
+                    data-title="{{title}}"
+                    data-precio="{{precio}}"
+                    data-category="{{category}}">
+                Agregar al carrito
+            </button>
+        </li>
+    </ul>
+    {{/each}}
+    {{else}}
+    <p>No hay productos disponibles.</p>
+    {{/if}}
+
+    <div>
+        {{#if hasPrevPage}}
+        <a href="?limit={{limit}}&page={{prevPage}}&sort={{sort}}&query={{query}}">Página anterior</a>
+        {{/if}}
+        {{#if hasNextPage}}
+        <a href="?limit={{limit}}&page={{nextPage}}&sort={{sort}}&query={{query}}">Página siguiente</a>
+        {{/if}}
+    </div>
+    <div id="cartsContainer"></div>
+    <button id="sendCartButton">Enviar carrito</button>
+</main>
+
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/static/assets/js/index.js"></script>
