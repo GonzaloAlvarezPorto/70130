@@ -10,7 +10,7 @@ const usersRouter = require('./routes/users.router.js');
 const pruebasRouter = require('./routes/pruebas.router.js');
 const sessionsRouter = require('./routes/sessions.router.js');
 
-const { connectDB } = require('./config/index.js');
+const { connectDB, configObject } = require('./config/index.js');
 const ProductsManagerMongo = require('./daos/mongo/productsManager.mongo.js');
 const CartsManagerMongo = require('./daos/mongo/cartsManager.mongo.js');
 const cookieParser = require('cookie-parser'); // => Hecho en clase con el profe
@@ -22,7 +22,7 @@ const passport = require('passport');
 const { initializePassport } = require('./config/passport.config.js');
 
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = configObject.port;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
