@@ -1,0 +1,9 @@
+.productos{
+    display: flex;
+    flex-direction: row;
+    padding: 0 3rem;
+}
+
+.editarProductos{
+    padding: 0 3rem;
+}
