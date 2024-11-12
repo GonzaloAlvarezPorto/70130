@@ -5,6 +5,7 @@ const viewsRouter = require('./routes/views.router.js');
 const sessionsRouter = require('./routes/sessions.router.js');
 const productsRouter = require('./routes/products.router.js');
 const cartsRouter = require('./routes/carts.router.js');
+const ticketsRouter = require('./routes/ticket.router.js')
 
 const path = require('path');
 const handlebars = require('express-handlebars');
@@ -40,6 +41,7 @@ app.use('/api/users', usersRouter);
 app.use('/api/sessions', sessionsRouter);
 app.use('/api/products', productsRouter);
 app.use('/api/carts', cartsRouter);
+app.use('/api/tickets', ticketsRouter);
 
 app.listen(PORT, () => {
     console.log(`Servidor ${PORT} en funcionamiento`)

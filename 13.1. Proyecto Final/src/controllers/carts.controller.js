@@ -1,4 +1,3 @@
-const Ticket = require("../daos/mongo/models/ticket.model");
 const CartsDTO = require("../dto/carts.dto");
 const { cartsService, productService, ticketService, userService } = require("../services");
 

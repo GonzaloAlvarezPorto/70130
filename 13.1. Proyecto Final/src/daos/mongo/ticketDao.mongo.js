@@ -1,8 +1,8 @@
-const Ticket = require("./models/ticket.model");
+const { ticketModel } = require("./models/ticket.model");
 
 class TicketDaoMongo {
     constructor(){
-        this.model = Ticket;
+        this.model = ticketModel;
     }
 
     create = async newTicket => await this.model.create(newTicket);

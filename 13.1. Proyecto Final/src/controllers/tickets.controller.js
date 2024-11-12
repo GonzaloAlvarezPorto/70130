@@ -1,4 +1,5 @@
-const Ticket = require('../models/ticket.model');
+const { ticketModel } = require('../daos/mongo/models/ticket.model');
+const { sendEmail } = require('../utils/sendEmail');
 
 class TicketsController {
     // Crear un nuevo ticket
@@ -6,7 +7,7 @@ class TicketsController {
         const { amount, purchaser } = req.body; // Suponemos que el cuerpo contiene la cantidad total y el correo del comprador
 
         try {
-            const newTicket = new Ticket({
+            const newTicket = new ticketModel({
                 amount,
                 purchaser
             });
@@ -24,6 +25,16 @@ class TicketsController {
             res.status(500).json({ error: 'Error al crear el ticket' });
         }
     };
+
+    enviarMail = async (req, res) => {
+        try {
+            await sendEmail()
+            res.send('mail enviado');
+        } catch (error) {
+            console.log(error);
+
+        }
+    }
 }
 
-module.exports = new TicketsController();
+module.exports = TicketsController;

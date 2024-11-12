@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
+const ticketCollection = 'ticket'
+
 // Definimos el esquema para el Ticket
 const ticketSchema = new Schema({
     code: {
@@ -26,5 +28,7 @@ const ticketSchema = new Schema({
 });
 
 // Creamos y exportamos el modelo basado en el esquema
-const Ticket = mongoose.model('Ticket', ticketSchema);
-module.exports = Ticket;
+const ticketModel = mongoose.model(ticketCollection, ticketSchema);
+module.exports = {
+    ticketModel
+};
