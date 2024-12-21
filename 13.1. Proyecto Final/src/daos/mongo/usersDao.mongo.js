@@ -1,4 +1,3 @@
-//CAPA DE PERSISTENCIA
 const { userModel } = require("./models/users.model");
 
 class UsersDaoMongo {

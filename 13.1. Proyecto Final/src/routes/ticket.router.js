@@ -7,7 +7,6 @@ const {
    enviarMail
 } = new TicketsController();
 
-// Ruta para crear un ticket
 router.post('/tickets', createTicket);
 
 router.get('/email', enviarMail);

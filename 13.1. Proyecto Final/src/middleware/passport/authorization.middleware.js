@@ -4,7 +4,6 @@ const authorization = role => {
             return res.status(401).send({ error: 'Unauthorized' });
         }
         
-        // Verificar si el rol del usuario está en la lista de roles permitidos
         if (req.user.role !== role) {
             return res.status(403).send({ error: `Not enough permissions for ${req.user.role}s` });
         }

@@ -1,0 +1,39 @@
+<main>
+    <h1>Lista de Productos</h1>
+    {{#if user}}
+    {{#if (eq user.role "admin")}}
+    <form action="/createProducts" method="GET">
+    {{log user}}
+        <button type="submit">Crear Producto</button>
+    </form>
+    {{/if}}
+    {{else}}
+    <p>No has iniciado sesión.</p>
+    {{/if}}
+    <section>
+        {{#each products}}
+        <h3>{{this.title}}</h3>
+        <p>{{this.description}}</p>
+        <p>Precio: ${{this.price}}</p>
+        <p>Stock: {{this.stock}}</p>
+        <p>Categoría: {{this.category}}</p>
+
+        {{#if ../user}}
+        {{#if (eq ../user.role "user")}}
+        <button>Agregar al carrito</button>
+        {{else if (eq ../user.role "admin")}}
+        <form action="/updateProduct" method="GET">
+            <button type="submit">Actualizar Producto</button>
+        </form>
+        <form action="/products/{{this._id}}" method="POST">
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="submit">Eliminar Producto</button>
+        </form>
+        {{/if}}
+        {{else}}
+        <p>No has iniciado sesión.</p>
+        {{/if}}
+        {{/each}}
+
+    </section>
+</main>

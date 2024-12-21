@@ -5,12 +5,14 @@
     "dev": "node --watch src/server.js --mode development"
   },
   "dependencies": {
+    "@faker-js/faker": "^9.3.0",
     "bcrypt": "^5.1.1",
     "commander": "^12.1.0",
     "cookie-parser": "^1.4.7",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "express-handlebars": "^8.0.1",
+    "faker": "^5.5.3",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.7.1",
     "nodemailer": "^6.9.16",

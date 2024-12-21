@@ -8,34 +8,40 @@ class ProductsController {
 
     createProduct = async (req, res) => {
         const productData = req.body;
-
-        const { title, category, precio, stock } = productData;
-        if (!title || !category || !precio || typeof precio !== 'number' || !stock || typeof stock !== 'number') {
+    
+        const { title, description, code, category } = productData;
+        let { price, stock, status } = productData;
+    
+        price = Number(price);
+        stock = Number(stock);
+    
+        if (status === undefined) {
+            status = true;
+        }
+    
+        if (!title || !description || !code || !category || !price || typeof price !== 'number' || isNaN(price) || !stock || typeof stock !== 'number' || isNaN(stock)) {
             return res.status(400).json({
-                message: "Todos los campos son obligatorios y deben ser válidos: title, category, price, stock"
+                message: "Todos los campos son obligatorios y deben ser válidos.",
             });
         }
-
+    
         try {
-            // Verificar si el producto ya existe por nombre
             const existingProduct = await this.service.getProduct({ title: productData.title });
-
+    
             if (existingProduct) {
                 return res.status(400).json({ message: "El producto ya existe" });
             }
-
-            // Crear el producto si no existe
-            const newProduct = await this.service.createProduct(productData);
+    
+            const newProduct = await this.service.createProduct({ ...productData, price, stock, status });
             const productDTO = new ProductsDTO(newProduct);
-
+    
             res.status(201).json({ message: "Producto creado", data: productDTO });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: "Error al crear el producto" });
         }
-        catch (error) {
-            console.log(error);
-            res.status(500).json({ error: 'Error al crear el producto' });
-        }
-    };
-
+    };    
+    
     getProduct = async (req, res) => {
         const { pid } = req.params;
         try {
@@ -57,17 +63,19 @@ class ProductsController {
     getProducts = async (req, res) => {
         try {
             const products = await this.service.getProducts({});
-
+    
+            const user = req.user;
+            
             const productsDTO = products.map(product => new ProductsDTO(product));
-
-            res.json(productsDTO)
-
+    
+            res.render('users/products', { products: productsDTO, user: user });
+    
         } catch (error) {
             console.log(error);
             res.status(500).json({ error: 'Error al obtener los productos' });
         }
-    }
-
+    };
+    
     updateProduct = async (req, res) => {
         const { pid } = req.params;
         let updatedData = req.body;

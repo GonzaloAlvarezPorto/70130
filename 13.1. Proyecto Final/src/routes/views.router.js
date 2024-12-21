@@ -9,4 +9,8 @@ router.get('/login', ViewsController.login);
 
 router.get('/register', ViewsController.register);
 
+router.get('/createProducts', ViewsController.createProduct);
+
+router.get('/updateProduct', ViewsController.updateProduct);
+
 module.exports = router;

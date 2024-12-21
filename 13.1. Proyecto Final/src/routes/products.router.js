@@ -13,7 +13,7 @@ const {
     deleteProduct
 } = new ProductsController();
 
-router.get('/', getProducts);
+router.get('/', passportCall('jwt'), getProducts);
 
 router.get('/:pid', getProduct);
 

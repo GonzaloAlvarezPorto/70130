@@ -12,7 +12,6 @@ class UsersController {
         let userData = req.body;
 
         try {
-            // Hashear la contraseña antes de crear el usuario
             userData.password = createHash(userData.password);
 
             const newUser = await this.service.createUser(userData);
@@ -70,7 +69,6 @@ class UsersController {
                 return res.status(404).json({ error: 'Usuario no encontrado' });
             }
 
-            // Usar DTO para estructurar la respuesta
             const userDTO = new UserDTO(updatedUser);
 
             res.json(userDTO);
@@ -89,12 +87,11 @@ class UsersController {
                 return res.status(404).json({ error: 'Usuario no encontrado' });
             }
     
-            // Usar DTO para estructurar la respuesta del usuario eliminado
             const userDTO = new UserDTO(deletedUser);
     
             res.json({
                 message: 'Usuario eliminado correctamente',
-                user: userDTO // Incluir el DTO del usuario eliminado
+                user: userDTO
             });
         } catch (error) {
             console.log(error);

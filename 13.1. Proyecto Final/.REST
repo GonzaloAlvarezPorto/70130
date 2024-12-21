@@ -1,92 +1,102 @@
-POST http://localhost:8080/api/sessions/login
-Content-Type: application/json
+# POST http://localhost:8080/api/sessions/login
+# Content-Type: application/json
 
-{
-    "email":"giselarapetti@gmail.com",
-    "password":"ppackk"
-}
+# {
+#     "email":"gonzaalvarezporto@gmail.com",
+#     "password":"ppackk"
+# }
 
-###
+# # ###
 
-POST http://localhost:8080/api/carts
-Content-Type: application/json
+# # POST http://localhost:8080/api/carts
+# # Content-Type: application/json
 
-{
-    "products":
-    [
-        {
-    "product": "Maracuyá",
-    "quantity": 10,
-    "price": 1230
-    },
-    {
-    "product": "Mekón",
-    "quantity": 10,
-    "price": 11230
-    },
-    {
-    "product": "Banana",
-    "quantity": 10,
-    "price": 1230
-    },
-    {
-    "product": "Mandarina",
-    "quantity": 10,
-    "price": 1230
-    }
-    ]
-}
+# # {
+# #     "products":
+# #     [
+# #         {
+# #     "product": "Maracuyá",
+# #     "quantity": 10,
+# #     "price": 1230
+# #     },
+# #     {
+# #     "product": "Mekón",
+# #     "quantity": 10,
+# #     "price": 11230
+# #     },
+# #     {
+# #     "product": "Banana",
+# #     "quantity": 10,
+# #     "price": 1230
+# #     },
+# #     {
+# #     "product": "Mandarina",
+# #     "quantity": 10,
+# #     "price": 1230
+# #     }
+# #     ]
+# # }
 
-# # PUT http://localhost:8080/api/carts/672e27868868f4ff2fdfbedb
+# # # PUT http://localhost:8080/api/carts/672e27868868f4ff2fdfbedb
+# # # Content-Type: application/json
+
+# # # {
+# # #     "products": [
+# # #         {
+# # #             "product": "Banana",
+# # #             "quantity": 80,
+# # #             "price": 20
+# # #         },
+# # #         {
+# # #             "product": "Manzana",
+# # #             "quantity": 2,
+# # #             "price": 20
+# # #         },
+# # #         {
+# # #             "product": "Pera",
+# # #             "quantity": 25,
+# # #             "price": 30
+# # #         }
+# # #     ]
+# # # }
+
+# # ###
+
+# # DELETE http://localhost:8080/api/carts/672e27868868f4ff2fdfbedb
 # # Content-Type: application/json
 
 # # {
 # #     "products": [
 # #         {
-# #             "product": "Banana",
-# #             "quantity": 80,
-# #             "price": 20
-# #         },
-# #         {
-# #             "product": "Manzana",
-# #             "quantity": 2,
-# #             "price": 20
-# #         },
-# #         {
-# #             "product": "Pera",
-# #             "quantity": 25,
-# #             "price": 30
+# #             "product": "Melón",
+# #             "quantity": 10,
+# #             "price": 160
 # #         }
 # #     ]
 # # }
 
 # ###
 
-# DELETE http://localhost:8080/api/carts/672e27868868f4ff2fdfbedb
-# Content-Type: application/json
-
-# {
-#     "products": [
-#         {
-#             "product": "Melón",
-#             "quantity": 10,
-#             "price": 160
-#         }
-#     ]
-# }
-
-###
-
 # POST http://localhost:8080/api/products
 # Content-Type: application/json
 
 # {
-#     "title":"Maracuyá",
-#     "category":"Fruta",
-#     "precio":11000,
-#     "stock":40
+#     "title": "Otra cosa",
+#     "description": "Chocolateadas",
+#     "code": "0002",
+#     "price": 2000,
+#     "status": true,
+#     "stock": 20,
+#     "category": "Golosinas"
 # }
 
-###
+# ###
 
-POST http://localhost:8080/api/carts/672e7df0c349995279a71a0b/purchase
+# POST http://localhost:8080/api/carts/672e7df0c349995279a71a0b/purchase
+
+POST http://localhost:8080/api/mocks/generateData
+Content-Type: application/json
+
+{
+    "users": 50
+}

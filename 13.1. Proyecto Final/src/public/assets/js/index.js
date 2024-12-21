@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Botones de eliminar
     const deleteButtons = document.querySelectorAll(".delete-button");
     deleteButtons.forEach(button => {
         button.addEventListener("click", async (event) => {
@@ -26,7 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Modal de edición
     const editButtons = document.querySelectorAll(".edit-button");
     editButtons.forEach(button => {
         button.addEventListener("click", (event) => {
@@ -35,20 +33,16 @@ document.addEventListener("DOMContentLoaded", () => {
             const productCategory = button.getAttribute("data-category");
             const productPrice = button.getAttribute("data-precio");
 
-            // Llenar los campos del modal con los valores actuales del producto
             document.getElementById("editTitle").value = productTitle;
             document.getElementById("editCategory").value = productCategory;
             document.getElementById("editPrecio").value = productPrice;
 
-            // Mostrar el modal
             document.getElementById("editModal").style.display = "block";
 
-            // Manejar el cierre del modal
             document.getElementById("closeModalButton").addEventListener("click", () => {
                 document.getElementById("editModal").style.display = "none";
             });
 
-            // Manejar el envío del formulario de edición
             const form = document.getElementById("editProductForm");
             form.onsubmit = async (e) => {
                 e.preventDefault();
@@ -72,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (response.ok) {
                         alert("Producto actualizado exitosamente.");
                         document.getElementById("editModal").style.display = "none";
-                        location.reload(); // Recargar la página para ver los cambios
+                        location.reload();
                     } else {
                         alert("Error al actualizar el producto.");
                     }

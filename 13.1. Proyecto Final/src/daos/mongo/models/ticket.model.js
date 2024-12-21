@@ -3,19 +3,18 @@ const { Schema } = mongoose;
 
 const ticketCollection = 'ticket'
 
-// Definimos el esquema para el Ticket
 const ticketSchema = new Schema({
     code: {
         type: String,
         unique: true,
         required: true,
         default: function() {
-            return `TICKET-${Math.floor(100000 + Math.random() * 900000)}`; // Genera un código único aleatorio
+            return `TICKET-${Math.floor(100000 + Math.random() * 900000)}`;
         }
     },
     purchase_datetime: {
         type: Date,
-        default: Date.now // Guardamos la fecha y hora actual al momento de crear el ticket
+        default: Date.now
     },
     amount: {
         type: Number,
@@ -23,11 +22,10 @@ const ticketSchema = new Schema({
     },
     purchaser: {
         type: String,
-        required: true // El correo del usuario asociado a la compra
+        required: true 
     }
 });
 
-// Creamos y exportamos el modelo basado en el esquema
 const ticketModel = mongoose.model(ticketCollection, ticketSchema);
 module.exports = {
     ticketModel

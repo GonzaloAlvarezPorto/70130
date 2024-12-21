@@ -1,4 +1,4 @@
-const { productService, userService } = require("../services");
+const { userService } = require("../services");
 const { isValidPassword } = require("../utils/bcrypt");
 const { generateToken } = require("../utils/jsonwebtoken");
 const UserDTO = require("../dto/users.dto")
@@ -33,9 +33,19 @@ class SessionsController {
                 httpOnly: true
             });
 
-            res.json({
-                message: `Logueado con éxito ${userFound.role} ${userFound.first_name}`,
-            });
+            if (userFound.role === 'admin') {
+                return res.render('users/admin', {
+                    message: `Bienvenido, ${userFound.first_name}`,
+                    user: userFound
+                });
+            } else if (userFound.role === 'user') {
+                return res.render('users/user', {
+                    message: `Bienvenido, ${userFound.first_name}`,
+                    user: userFound
+                });
+            } else {
+                return res.status(403).render('error', { message: 'Rol no autorizado' });
+            }
 
         } catch (error) {
             console.error(error);
@@ -44,7 +54,7 @@ class SessionsController {
     }
 
     currentSession = (req, res) => {
-        const userDTO = new UserDTO(req.user);  // Usamos los datos del usuario de req.user
+        const userDTO = new UserDTO(req.user);
 
         res.send({
             dataUser: userDTO,

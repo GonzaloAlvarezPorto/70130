@@ -7,7 +7,7 @@ const cartSchema = new Schema({
     clientName: { type: String, required: true },
     products: [
         {
-            product: { type: String, required: true },  // El nombre del producto
+            product: { type: String, required: true },
             quantity: { type: Number, required: true },
             price: {type: Number, required: true},
             
@@ -21,7 +21,6 @@ cartSchema.virtual('totalAmount').get(function () {
     }, 0);
 });
 
-// Asegurarse de incluir los virtuales al convertir el documento a JSON
 cartSchema.set('toJSON', { virtuals: true });
 
 const cartModel = model(cartCollection, cartSchema);
