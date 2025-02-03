@@ -12,6 +12,7 @@ class ProductsRepository {
     updateProduct = async (pid, updateData) => await this.dao.update(pid, updateData);
 
     deleteProduct = async pid => await this.dao.delete(pid);
+    
 }
 
 module.exports = {

@@ -1,0 +1,164 @@
+paths:
+  /api/users:
+    get:
+      summary: Obtiene todos los usuarios
+      tags:
+        - Users
+      responses:
+        "200":
+          description: Los usuarios fueron obtenidos satisfactorios de la base de datos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/User'
+        "500":
+          description: Error interno del servidor, usualmente generado por una mala query o un problema con la base de datos
+    post:
+      summary: crea un usuario a partir del body
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#components/requestBodies/createUser'
+      responses:
+        "201":
+          description: El usuario fue creado exitosamente
+  /api/users/{uid}:
+    get:
+      summary: Obtiene un usuario a partir de su Id
+      tags:
+        - Users
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          description: Id del usuario que vamos a buscar
+          schema:
+            $type: String
+      responses:
+        "200":
+          description: El usuario fue obtenido satisfactoriamente de la base de datos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/User'
+        "500":
+          description: Error interno del servidor, usualmente generado por una mala query o un problema con la base de datos
+    delete:
+      summary: Elimina un usuario a partir de su Id
+      tags:
+        - Users
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          description: Id del usuario que vamos a buscar
+          schema:
+            $type: String
+      responses:
+        "200":
+          description: El usuario fue eliminado satisfactoriamente de la base de datos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/User'
+        "500":
+          description: Error interno del servidor, usualmente generado por una mala query o un problema con la base de datos
+    put:
+      summary: modifica un usuario a partir del body
+      tags:
+        - Users
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          description: Id del usuario que vamos a modificar
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#components/requestBodies/editUser'
+      responses:
+        "200":
+          description: El usuario fue modificado exitosamente
+        "500":
+          description: Error interno del servidor
+components: 
+  schemas:
+    User:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: Id autogenerado por mongo
+        first_name:
+          type: String
+          description: Nombre del usuario
+        last_name:
+          type: String
+          description: Apellido del usuario
+        email:
+          type: String
+          description: Email del usuario
+        password:
+          type: String
+          description: Password del usuario
+      example:
+        _id: ObjectId(aksjdalsdkajsdlaksjdlaskdjasdlkasjdad)
+        first_name: Gonzalo
+        last_name: Alvarez Porto
+        email: queteimportacomoesmimail@gmail.com
+        password: $asdjasldk.-asndañlskdja.-kjdasd{alskd}
+  requestBodies:
+    createUser:
+      type: object
+      properties:
+        first_name:
+          type: String
+          description: Nombre del usuario
+        last_name:
+          type: String
+          description: Apellido del usuario
+        email:
+          type: String
+          description: Email del usuario
+        password:
+          type: String
+          description: Password del usuario
+      example:
+        first_name: Gonzalo
+        last_name: Alvarez Porto
+        email: queteimportacomoesmimail@gmail.com
+        password: 'ppackk'
+    editUser:
+      type: object
+      properties:
+        first_name:
+          type: String
+          description: Nombre del usuario
+        last_name:
+          type: String
+          description: Apellido del usuario
+        email:
+          type: String
+          description: Email del usuario
+        password:
+          type: String
+          description: Password del usuario
+      example:
+        first_name: Gonzalo
+        last_name: Alvarez Porto
+        email: queteimportacomoesmimail@gmail.com
+        password: 'ppackk'

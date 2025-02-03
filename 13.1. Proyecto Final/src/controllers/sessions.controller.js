@@ -25,7 +25,8 @@ class SessionsController {
             const token = generateToken({
                 id: userFound._id,
                 role: userFound.role,
-                full_name: `${userFound.first_name} ${userFound.last_name}`
+                full_name: `${userFound.first_name} ${userFound.last_name}`,
+                email: `${userFound.email}`
             });
 
             res.cookie('token', token, {

@@ -1,8 +1,8 @@
 {
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/server.js --mode production",
-    "dev": "node --watch src/server.js --mode development"
+    "dev": "node --watch src/server.js --mode development",
+    "test": "mocha test/supertest.test.js"
   },
   "dependencies": {
     "@faker-js/faker": "^9.3.0",
@@ -18,6 +18,16 @@
     "nodemailer": "^6.9.16",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1",
+    "swagger-express": "^1.0.5",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "chai": "^5.1.2",
+    "mocha": "^11.1.0",
+    "supertest": "^7.0.0"
   }
 }

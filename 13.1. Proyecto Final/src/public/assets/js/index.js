@@ -1,104 +1,49 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const deleteButtons = document.querySelectorAll(".delete-button");
-    deleteButtons.forEach(button => {
-        button.addEventListener("click", async (event) => {
-            event.preventDefault();
-            const productId = button.getAttribute("data-id");
-            const confirmDelete = confirm("¿Seguro que deseas eliminar este producto?");
-            if (!confirmDelete) return;
+const socketConnection = io();
 
-            try {
-                const response = await fetch(`/api/products/${productId}`, {
-                    method: "DELETE"
-                });
+// Solicitar productos al cargar la página
+socketConnection.emit('requestProducts');
 
-                if (response.ok) {
-                    button.parentElement.remove();
-                    alert("Producto eliminado exitosamente.");
-                } else {
-                    alert("Error al eliminar el producto.");
-                }
-            } catch (error) {
-                console.error("Error en la solicitud:", error);
-                alert("Error de conexión.");
-            }
-        });
+// Escuchar actualizaciones de productos
+socketConnection.on('productosNuevos', data => {
+    let log = document.querySelector('#productosNuevos');
+    let productsHTML = '';
+
+
+    data.forEach(product => {
+        productsHTML += `<div id="fichaProducto">
+                            <h3>${product._id}</h3>
+                            <p>Nombre producto: ${product.title}</p>
+                            <p>Precio producto: ${product.price}</p>
+                        </div>`;
     });
 
-    const editButtons = document.querySelectorAll(".edit-button");
-    editButtons.forEach(button => {
-        button.addEventListener("click", (event) => {
-            const productId = button.getAttribute("data-id");
-            const productTitle = button.getAttribute("data-title");
-            const productCategory = button.getAttribute("data-category");
-            const productPrice = button.getAttribute("data-precio");
-
-            document.getElementById("editTitle").value = productTitle;
-            document.getElementById("editCategory").value = productCategory;
-            document.getElementById("editPrecio").value = productPrice;
-
-            document.getElementById("editModal").style.display = "block";
-
-            document.getElementById("closeModalButton").addEventListener("click", () => {
-                document.getElementById("editModal").style.display = "none";
-            });
-
-            const form = document.getElementById("editProductForm");
-            form.onsubmit = async (e) => {
-                e.preventDefault();
-                const updatedTitle = document.getElementById("editTitle").value;
-                const updatedCategory = document.getElementById("editCategory").value;
-                const updatedPrice = document.getElementById("editPrecio").value;
-
-                try {
-                    const response = await fetch(`/api/products/${productId}`, {
-                        method: "PUT",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            title: updatedTitle,
-                            category: updatedCategory,
-                            precio: updatedPrice
-                        })
-                    });
-
-                    if (response.ok) {
-                        alert("Producto actualizado exitosamente.");
-                        document.getElementById("editModal").style.display = "none";
-                        location.reload();
-                    } else {
-                        alert("Error al actualizar el producto.");
-                    }
-                } catch (error) {
-                    console.error("Error en la solicitud:", error);
-                    alert("Error de conexión.");
-                }
-            };
-        });
-    });
-
-    document.querySelectorAll('.add-to-cart').forEach(button => {
-        button.addEventListener('click', async (event) => {
-            const productId = event.target.getAttribute('data-id');
-            
-            try {
-                const response = await fetch('/api/carts', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ productId })
-                });
-
-                if (response.ok) {
-                    console.log('Producto agregado al carrito');
-                } else {
-                    console.error('Error al agregar el producto al carrito');
-                }
-            } catch (error) {
-                console.error('Error de red:', error);
-            }
-        });
-    });
+    if (log) {
+        log.innerHTML = productsHTML;
+    }
 });
+
+async function deleteProduct(productId) {
+    console.log(productId);
+    const confirmation = confirm("¿Estás seguro de que deseas eliminar este producto?");
+    if (!confirmation) return; // Cancela si el usuario no confirma
+
+    try {
+        const response = await fetch(`/api/products/${productId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (response.ok) {
+            alert("Producto eliminado correctamente");
+            location.reload(); // Recarga la página para reflejar los cambios
+        } else {
+            const errorData = await response.json();
+            alert(errorData.error || "Error al eliminar el producto");
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        alert("Error al procesar la solicitud");
+    }
+}

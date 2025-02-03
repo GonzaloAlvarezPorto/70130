@@ -1,0 +1,24 @@
+<main>
+
+<form id="productForm">
+    <div>
+        <input type="text" id="productTitle" name="productTitle" placeholder="title" required />
+        <input type="number" id="productPrice" name="productPrice" placeholder="price" required />
+        <input type="text" id="productCategory" name="productCategory" placeholder="category" required/>
+    </div>
+    <div>
+        <button type="submit">Agregar Producto</button>
+    </div>
+</form>
+
+<form id="carrito">
+    <div>
+        <p id="productosNuevos"></p>
+    </div>
+    <button type="submit">Cerrar carrito</button>
+</form>
+</main>
+
+
+<script src='/socket.io/socket.io.js'></script>
+<script src="/static/assets/js/index.js"></script>

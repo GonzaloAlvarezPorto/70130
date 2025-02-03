@@ -3,14 +3,25 @@ const ViewsController = require("../controllers/views.controller");
 
 const router = Router();
 
-router.get('/', ViewsController.index);
+const {
+    index,
+    login,
+    register,
+    createProduct,
+    updateProduct,
+    getProductsRealTime
+} = new ViewsController()
 
-router.get('/login', ViewsController.login);
+router.get('/', index);
 
-router.get('/register', ViewsController.register);
+router.get('/login', login);
 
-router.get('/createProducts', ViewsController.createProduct);
+router.get('/register', register);
 
-router.get('/updateProduct', ViewsController.updateProduct);
+router.get('/createProducts', createProduct);
+
+router.get('/updateProduct', updateProduct);
+
+router.get('/realtimeproducts', getProductsRealTime);
 
 module.exports = router;

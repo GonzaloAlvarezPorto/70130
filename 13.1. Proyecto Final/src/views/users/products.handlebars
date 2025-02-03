@@ -21,14 +21,13 @@
         {{#if ../user}}
         {{#if (eq ../user.role "user")}}
         <button>Agregar al carrito</button>
+        <button>Información</button>
         {{else if (eq ../user.role "admin")}}
         <form action="/updateProduct" method="GET">
             <button type="submit">Actualizar Producto</button>
         </form>
-        <form action="/products/{{this._id}}" method="POST">
-            <input type="hidden" name="_method" value="DELETE">
-            <button type="submit">Eliminar Producto</button>
-        </form>
+        <button onclick="deleteProduct('{{this.id}}')">Eliminar Producto</button>
+        <button>Información</button>
         {{/if}}
         {{else}}
         <p>No has iniciado sesión.</p>
